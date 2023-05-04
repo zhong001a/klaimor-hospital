@@ -1,27 +1,24 @@
 .apppointment__header {
     color: white;
     text-align: center;
+    
 }
 
 .apppointment {
-    width: 100%;
-    max-width: 70%;
-
+    width: 80%;
+    max-width: 100%;
     text-align: center;
 }
 
 .apppointment form {
-    margin-bottom: 1rem;
+    margin-bottom: 5rem;
 }
 
 .table-container{
     width: 100%;
-    
-}
-.table-container .td-children{
-    width: 50%;
+    max-width: 100%;
 }
 
 .form-container{
     width: 100%;
-}
+    background: #000;}

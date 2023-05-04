@@ -25,31 +25,33 @@ const Appointment = () => {
         <form className='form-container'>
             <table className='table-container'>
                 <tr>
-                    <td className='td=half'>
-                       
-                        <Input
-                            element="input"
-                            id="name"
-                            type="text"
-                            label="Name - Lastname "
-                            validators={[VALIDATOR_REQUIRE()]}
-                    
-                            errorText="Please enter a name."
-                            onInput={inputHandler}
-                        />
+                    <td >
+                      <Input 
+              
+                          element="input"
+                          id="name"
+                          type="text"
+                          label="Name - Lastname "
+                          validators={[VALIDATOR_REQUIRE()]}
+                          errorText="Please enter a name."
+                          onInput={inputHandler}
+                      />
+
                     </td>
+
                     <td >
                        
-                       <Input
-                           element="input"
-                           id="name"
-                           type="text"
-                           label="Name - Lastname "
-                           validators={[VALIDATOR_REQUIRE()]}
-                   
-                           errorText="Please enter a name."
-                           onInput={inputHandler}
-                       />
+                      <Input
+                         
+                          element="input"
+                          id="name"
+                          type="text"
+                          label="Name - Lastname "
+                          validators={[VALIDATOR_REQUIRE()]}
+                          errorText="Please enter a name."
+                          onInput={inputHandler}
+                      />
+                       
                    </td>
                 </tr>
 
