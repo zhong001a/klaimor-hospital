@@ -34,7 +34,7 @@ const MainNavigation = (porps) => {
           <span/>
           <span/>
         </button>
-        <Link className='Link' to='/' exact>
+        <Link className='Link' to='/sigup' exact>
           <h1 className="main-navigation__title">Klaimor</h1>
         </Link>
 

@@ -5,6 +5,8 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 import Index from './router/index/Index';
 import MainNavigation from './shared/components/Navigation/MainNavigation';
 import Appointment from './router/appiontment/pages/Appointment';
+import Sigup from './router/users/pages/Sigup';
+import DataUser from './router/users/pages/user-data';
 function App() {
   return (
     <div className='App'>
@@ -13,12 +15,25 @@ function App() {
         <MainNavigation/>
         <main>
           <Switch>
+
             <Route path='/' exact > 
               <Index/>
             </Route>
+
             <Route path='/appointment' exact > 
               <Appointment/>
             </Route>
+
+            <Route path='/sigup' exact > 
+              <Sigup/>
+            </Route>
+
+            <Route path='/sigup/data' exact > 
+              <DataUser/>
+            </Route>
+
+
+            
             <Redirect to='/' /> 
           </Switch>
         </main>

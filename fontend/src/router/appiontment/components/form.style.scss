@@ -1,0 +1,37 @@
+.apppointment__header {
+    color: white;
+    text-align: center;
+    
+}
+
+.row{
+    background: #fff;
+    width: 97%;
+    max-width: 100%;
+    .colum{
+        display:inline-block;
+        width: 50%;
+        max-width: 100%; 
+        
+    }
+
+}
+
+@media (max-width: 768px){
+    .row{
+        background: #fff;
+        width: 100%;
+        max-width: 100%;
+        .colum{
+            display:inline-block;
+            width: 100%;
+            max-width: 100%; 
+            
+        }
+
+    }
+}
+
+
+
+
