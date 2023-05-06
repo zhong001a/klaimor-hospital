@@ -23,7 +23,16 @@ const FormSigup = () => {
           }
         },
         false
-      );
+    );
+
+    const submitHandler = event =>{
+      
+      const name = formState.inputs.name.value;
+      const email = formState.inputs.email.value;
+      const password = formState.inputs.password.value;
+      event.preventDefault();
+    }
+
     return (
         <div className='form-container'>
             <form className='container'>
@@ -60,7 +69,7 @@ const FormSigup = () => {
                     Login
                 </Button>
 
-                <Button to = '/sigup/data' type="submit">
+                <Button to = '/sigup' type="submit">
                     Sigup
                 </Button>
 
