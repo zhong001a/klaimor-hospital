@@ -4,7 +4,6 @@ const UserData = require('../models/user-data.model')
 const HttpError = require('../models/http-error');
 const  mongoose  = require("mongoose");
 
-
 const getUser = async (req, res, next) => {
     let users;
 
@@ -17,7 +16,6 @@ const getUser = async (req, res, next) => {
 
     res.json({ users: users.map(user => user.toObject({getters: true})) });
 };
-
 
 
 const createUser = async (req, res, next) =>{
@@ -55,8 +53,8 @@ const createUser = async (req, res, next) =>{
       return next(err);
     }
     
-    // res.json({data : createUser.toObject({ getters: true }) })
-    res.json({ data : createUser })
+
+    res.json({ createUser })
 }
 const createDataUser = async (req, res, next) =>{
     const { firstname, lastname, gender, birthdate, heigth, weight, userId } = req.body;
@@ -104,9 +102,31 @@ const createDataUser = async (req, res, next) =>{
         return next(err);
     }
 
-    res.json({ data :  createDataUser })
+    res.json({ createDataUser })
+}
+
+const getUserData = async (req, res, next) =>{
+  const userId = req.params.uid;
+
+  let userData ;
+  try {
+    userData = await User.findById(userId).populate('userdata')
+
+  } catch (error) {
+    const err = new HttpError("Could not find user data by user id . ");
+    return  next(err)
+    
+  }
+
+  if(!userData || userData.length === 0){
+    const error = new HttpError('No user id.')
+    return next(error)
+  }
+
+  res.json({ data : userData.userdata })
 }
 
 exports.getUser = getUser;
 exports.createUser = createUser;
 exports.createDataUser = createDataUser;
+exports.getUserData = getUserData

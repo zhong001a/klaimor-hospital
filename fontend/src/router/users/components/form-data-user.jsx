@@ -5,9 +5,14 @@ import Button from '../../../shared/components/UIElement/Button/Button';
 import { VALIDATOR_REQUIRE} from '../../../shared/util/validators';
 import { useForm } from '../../../shared/hook/form-hook';
 import  './form.style.scss'
-const FormDataUser = () => {
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
+const FormDataUser = () => {
+    
     const [formState, inputHandler] = useForm(
+
         {
           firstname: {
             value: '',
@@ -29,16 +34,40 @@ const FormDataUser = () => {
             value: '',
             isValid: false
           },
-          wieth: {
+          weight: {
             value: '',
             isValid: false
           }
         },
         false
       );
+
+    const userId = useParams().uid;
+    const history = useHistory();
+    const onSubmitHandler = async (event) => {
+      event.preventDefault();
+      const firstname = formState.inputs.firstname.value;
+      const lastname = formState.inputs.lastname.value;
+      const gender = formState.inputs.gender.value;
+      const birthdate = formState.inputs.birthdate.value;
+      const height = formState.inputs.height.value;
+      const weight = formState.inputs.weight.value;
+
+      await axios.post(`http://localhost:4040/api/users/create/data`,{firstname, lastname, gender, birthdate, height, weight, userId})
+      .then(response => {
+        console.log(response.data)
+        history.push('/appointment')
+    
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  
+      // console.log(firstname, lastname, gender, birthdate, height, weight, userId)
+    }
     return (
         <div className='form-container'>
-            <form className='container'>
+            <form className='container' onSubmit={onSubmitHandler}>
                 <Input
                     element="input"
                     id="firstname"
@@ -81,11 +110,11 @@ const FormDataUser = () => {
 
                 <Input
                     element="input"
-                    id="heigth"
+                    id="height"
                     type="number"
-                    label="Heigth"
+                    label="height"
                     validators={[VALIDATOR_REQUIRE()]}
-                    errorText="Please enter a valid Heigth."
+                    errorText="Please enter a valid height."
                     onInput={inputHandler}
                 />
 
@@ -93,9 +122,9 @@ const FormDataUser = () => {
                     element="input"
                     id="weight"
                     type="number"
-                    label="Weigth"
+                    label="Weight"
                     validators={[VALIDATOR_REQUIRE()]}
-                    errorText="Please enter a valid Weigth."
+                    errorText="Please enter a valid Weight."
                     onInput={inputHandler}
                 />
 
@@ -104,7 +133,7 @@ const FormDataUser = () => {
                     Login
                 </Button>
 
-                <Button to = '/sigup/data' type="submit">
+                <Button  type="submit" >
                     Sigup
                 </Button>
 

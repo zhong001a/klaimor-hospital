@@ -28,7 +28,7 @@ function App() {
               <Sigup/>
             </Route>
 
-            <Route path='/sigup/data' exact > 
+            <Route path='/sigup/data/:uid' exact > 
               <DataUser/>
             </Route>
 
