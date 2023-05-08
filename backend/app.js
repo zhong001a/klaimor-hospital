@@ -12,10 +12,11 @@ dotenv.config();
 
 //import router
 const userRoute = require('./routes/users/user-route')
+const doctorRoute = require('./routes/doctors/doctor-route')
 
 //api 
 app.use('/api/users',userRoute);
-
+app.use('/api/doctor',doctorRoute)
 
 //return error
 app.use((req, res, next) => {
