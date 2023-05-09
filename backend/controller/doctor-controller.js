@@ -96,8 +96,27 @@ const createAppoin = async (req, res, next) =>{
     res.status(201).json({ data: createAppoint})
 }
 
+const getAllDoctors = async (req, res, next) =>{
+    let doctors;
+
+    try{
+        doctors = await Doctor.find();
+    }catch(error){
+        const err = new HttpError("Get doctors by experties error.");
+        return next(err);
+    }
+
+    if(!doctors){
+        const err = new HttpError("No doctors expertise.");
+        return next(err);
+    }
+
+    res.json({ doctors : doctors });
+
+}
 
 exports.createDoctor = createDoctor;
 exports.getDoctor = getDoctor;
 exports.getDoctorByExperties = getDoctorByExperties;
-exports.createAppoin = createAppoin
+exports.createAppoin = createAppoin;
+exports.getAllDoctors = getAllDoctors;

@@ -2,7 +2,7 @@ import React,{useEffect, useState} from 'react'
 
 import Input from '../../../shared/components/Formcomponent/Input';
 import Button from '../../../shared/components/UIElement/Button/Button';
-import { VALIDATOR_REQUIRE, VALIDATOR_MAXLENGTH } from '../../../shared/util/validators';
+import { VALIDATOR_REQUIRE, VALIDATOR_MAXLENGTH, VALIDATOR_MINLENGTH } from '../../../shared/util/validators';
 import { useForm } from '../../../shared/hook/form-hook';
 import  './form.style.scss'
 import Modal from '../../../shared/components/UIElement/Modal/Modal';
@@ -22,7 +22,7 @@ const FormAppointment = () => {
 
 
     const fectDoctor = () =>{
-      axios.get(`http://localhost:4040/api/doctor`)
+      axios.get(`http://localhost:4040/api/doctor/expertise`)
       .then(response => {
           // console.log(response.data)
           setDoctor(response.data.doctors)
@@ -119,7 +119,7 @@ const FormAppointment = () => {
                                 id="phone"
                                 type="text"
                                 label="เบอร์โทร"
-                                validators={[VALIDATOR_REQUIRE(),VALIDATOR_MAXLENGTH(10)]}
+                                validators={[VALIDATOR_MINLENGTH(10)]}
                                 errorText="Please enter a valid phone number and max length 10"
                                 onInput={inputHandler}
                             />
@@ -141,7 +141,7 @@ const FormAppointment = () => {
                 <div className='expertise'>
                   <label className='label'>ความเชี่ยวชาญ</label>
                   <select name="" id="" className='option' onChange={setValue}>
-                    <option value="ความเชี่ยวชาญเวชปฏิบัติทั่วไป" key="1" className='option'>ความเชี่ยวชาญเวชปฏิบัติทั่วไป</option>
+                    <option value="เลือกโดยเจ้าหน้าที่" key="1" className='option'>เลือกโดยเจ้าหน้าที่</option>
                     {doctors.map(expertise => {
                       return(
                         <option value={expertise} key={expertise} className='option'>{expertise}</option>
@@ -167,12 +167,12 @@ const FormAppointment = () => {
  
 
                 <div className='buttoncenter'>
-                  <Button inverse >
-                      Cancel
+                  <Button inverse to='/doctor'>
+                      เลือกหมอเอง
                   </Button>
 
-                  <Button  type="submit"  >
-                      Submit
+                  <Button  type="submit"  disabled={!formState.isValid} >
+                      สร้างนัดหมาย
                   </Button>
                 </div>
 
@@ -184,7 +184,6 @@ const FormAppointment = () => {
               footer={
                 <React.Fragment>
                   
-
                 </React.Fragment>
               
               }

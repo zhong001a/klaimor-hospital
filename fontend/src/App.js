@@ -8,6 +8,7 @@ import Appointment from './router/appiontment/pages/Appointment';
 import Sigup from './router/users/pages/Sigup';
 import DataUser from './router/users/pages/user-data';
 import Doctor from './router/doctors/pages/Doctor';
+import UserProfile from './router/users/pages/user-profile';
 
 function App() {
   return (
@@ -38,8 +39,11 @@ function App() {
               <Doctor/>
             </Route>
 
+            <Route path='/Profile' exact > 
+              <UserProfile/>
+            </Route>
 
-            
+
             <Redirect to='/' /> 
           </Switch>
         </main>

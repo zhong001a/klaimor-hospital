@@ -2,7 +2,7 @@ import React,{useEffect, useState} from 'react'
 import './doctor-list.scss'
 import axios from 'axios'
 
-
+import DoctorsCard from './doctors-card'
 const DoctorList = () => {
     const [doctors, setDoctor ] = useState([]);
 
@@ -22,20 +22,10 @@ const DoctorList = () => {
     },[]);
 
     return (
-            
-        <div >
-            <label htmlFor="select" className='label'>ศูนย์รักษา</label>
-
-            <select name="" id="" className='option'>
-
-                <option className='option' key="1" value="ทั้งหมด" >ทั้งหมด</option>
-                {doctors.map(doctor => {
-
-                    return(
-                        <option className='option' key={doctor} >{doctor}</option>
-                   )
-                })}
-            </select> 
+        <div className='doctor-container'>
+            {doctors.map((doctor) => (
+                <DoctorsCard key={doctor.id} doctor={doctor} />
+            ))}
         </div>
     )
 }
