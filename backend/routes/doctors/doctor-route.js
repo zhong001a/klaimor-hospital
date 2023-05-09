@@ -7,6 +7,8 @@ router.get("/", doctorController.getDoctor);
 router.get("/experties/:expertise", doctorController.getDoctorByExperties)
 
 router.post("/create", doctorController.createDoctor);
+router.post("/create/appoint", doctorController.createAppoin);
+
 
 
 module.exports = router;

@@ -1,8 +1,8 @@
 const HttpError = require('../models/http-error');
 
 
-const Doctor = require('../models/doctor');
-const doctor = require('../models/doctor');
+const Appointment = require('../models/appointment');
+const Doctor = require('../models/doctor')
 
 const createDoctor = async (req, res, next) =>{
     const { imageUrl, name, expertise } = req.body;
@@ -31,9 +31,6 @@ const createDoctor = async (req, res, next) =>{
         expertise
     })
 
-
-  
-
     try {
         await createDoctor.save();
       } catch (error) {
@@ -49,14 +46,14 @@ const getDoctor = async (req, res, next) =>{
     let doctors; 
 
     try {
-        doctors = await Doctor.find();
+        doctors = await Doctor.find().distinct( "expertise" );
     } catch (error) {
         const err = new HttpError("Could not find doctor. ",500);
         return next(err);
     }
 
-    res.json({ doctors : doctors.map(doctor => doctor.toObject({getters: true})) });
-    
+    res.json({ doctors : doctors });
+    // .map(doctor => doctor.toObject({getters: true}))
 }
 
 const getDoctorByExperties = async (req, res, next) =>{
@@ -76,9 +73,31 @@ const getDoctorByExperties = async (req, res, next) =>{
     }
 
     res.json({ doctors : doctors });
-
 }
+
+const createAppoin = async (req, res, next) =>{
+    const { name, phone, email, expertise, symptom } = req.body;
+
+    const createAppoint = new Appointment({
+        name,
+        phone,
+        email,
+        expertise,
+        symptom
+    })
+
+    try {
+        await createAppoint.save();
+    } catch (error) {
+        const err = new HttpError("Could not create Appointment.", 500);
+        return next(err);
+    }
+
+    res.status(201).json({ data: createAppoint})
+}
+
 
 exports.createDoctor = createDoctor;
 exports.getDoctor = getDoctor;
 exports.getDoctorByExperties = getDoctorByExperties;
+exports.createAppoin = createAppoin

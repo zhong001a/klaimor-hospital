@@ -1,11 +1,43 @@
-import React from 'react'
+import React,{useEffect, useState} from 'react'
 
 import Input from '../../../shared/components/Formcomponent/Input';
 import Button from '../../../shared/components/UIElement/Button/Button';
 import { VALIDATOR_REQUIRE, VALIDATOR_MAXLENGTH } from '../../../shared/util/validators';
 import { useForm } from '../../../shared/hook/form-hook';
 import  './form.style.scss'
+import Modal from '../../../shared/components/UIElement/Modal/Modal';
+import axios from 'axios';
 const FormAppointment = () => {
+
+    const [doctors, setDoctor ] = useState([]);
+    const [expertise, setExpertise ] = useState("")
+    const [openModal, setOpenModal] = useState(false);
+
+    const openModalHandler =() =>{
+      setOpenModal(true)
+    }
+    const closeModalHandler =() =>{
+      setOpenModal(false)
+    }
+
+
+    const fectDoctor = () =>{
+      axios.get(`http://localhost:4040/api/doctor`)
+      .then(response => {
+          // console.log(response.data)
+          setDoctor(response.data.doctors)
+
+          
+      })
+
+      .catch(err => {
+        console.log(err)
+      })
+    }
+
+    useEffect(()=>{
+        fectDoctor();
+    },[]);
 
     const [formState, inputHandler] = useForm(
         {
@@ -21,21 +53,61 @@ const FormAppointment = () => {
             value: '',
             isValid: false
           },
-          password: {
+          symptom: {
             value: '',
             isValid: false
           }
         },
         false
       );
+
+      const setValue = event =>{
+        setExpertise(event.target.value);
+        console.log(expertise)
+      }
+
+      if(!expertise){
+        setExpertise("ความเชี่ยวชาญเวชปฏิบัติทั่วไป")
+      }
+
+
+      const onSubmitHandler = async event =>{
+        const name = formState.inputs.name.value;
+        const email = formState.inputs.email.value;
+        const phone = formState.inputs.phone.value;
+        const symptom = formState.inputs.symptom.value;
+        event.preventDefault();
+
+        axios.post(`http://localhost:4040/api/doctor/create/appoint`,{name, phone, email, symptom, expertise})
+        .then(response => {
+            console.log(response)
+            if(response.status === 201){
+              openModalHandler()
+
+            }
+
+              
+          }
+        )
+        .catch(err =>{
+          console.log(err)
+     
+        })
+        // console.log(name,email,phone,expertise,symptom)
+      }
+
+
+
+
+
     return (
       
-            <form >
+            <form onSubmit={onSubmitHandler}>
                 <Input
                     element="input"
                     id="name"
                     type="text"
-                    label="Name Lastname"
+                    label="ชื่อ - นามสกุล"
                     validators={[VALIDATOR_REQUIRE()]}
                     errorText="Please enter a valid name and lastname."
                     onInput={inputHandler}
@@ -46,7 +118,7 @@ const FormAppointment = () => {
                                 element="input"
                                 id="phone"
                                 type="text"
-                                label="Phone Number"
+                                label="เบอร์โทร"
                                 validators={[VALIDATOR_REQUIRE(),VALIDATOR_MAXLENGTH(10)]}
                                 errorText="Please enter a valid phone number and max length 10"
                                 onInput={inputHandler}
@@ -58,7 +130,7 @@ const FormAppointment = () => {
                                 element="input"
                                 id="email"
                                 type="email"
-                                label="Email"
+                                label="อีเมล"
                                 validators={[VALIDATOR_REQUIRE()]}
                                 errorText="Please enter a Email"
                                 onInput={inputHandler}
@@ -66,26 +138,62 @@ const FormAppointment = () => {
                         </div>
                 </div>
 
+                <div className='expertise'>
+                  <label className='label'>ความเชี่ยวชาญ</label>
+                  <select name="" id="" className='option' onChange={setValue}>
+                    <option value="ความเชี่ยวชาญเวชปฏิบัติทั่วไป" key="1" className='option'>ความเชี่ยวชาญเวชปฏิบัติทั่วไป</option>
+                    {doctors.map(expertise => {
+                      return(
+                        <option value={expertise} key={expertise} className='option'>{expertise}</option>
+                      )
+                    })}
+                    
+
+                  </select>
+                </div>
+                
                
                 
                 <Input
                     element="textarea"
-                    id="status"
+                    id="symptom"
                     type="text"
-                    label="Initial Symptoms"
+                    label="อาการเบื้องต้น"
                     validators={[VALIDATOR_REQUIRE()]}
                     errorText="Please enter a Initial Symptoms"
                     onInput={inputHandler}
                 />
-                
-                <Button inverse type="submit">
-                    Submit
-                </Button>
 
-                <Button  type="submit">
-                    Submit
-                </Button>
+ 
+
+                <div className='buttoncenter'>
+                  <Button inverse >
+                      Cancel
+                  </Button>
+
+                  <Button  type="submit"  >
+                      Submit
+                  </Button>
+                </div>
+
+            <Modal 
+              show={openModal}
+              onCancel={closeModalHandler}
+              header="Are you sure ? "
+              footerClass='place-item__modal-actions'
+              footer={
+                <React.Fragment>
+                  
+
+                </React.Fragment>
+              
+              }
+            >
+              <h2>ทำการนัดหมายเรียบร้อย</h2>
+            </Modal>
+
             </form>
+            
 
   
   );

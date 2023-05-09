@@ -7,6 +7,8 @@ import MainNavigation from './shared/components/Navigation/MainNavigation';
 import Appointment from './router/appiontment/pages/Appointment';
 import Sigup from './router/users/pages/Sigup';
 import DataUser from './router/users/pages/user-data';
+import Doctor from './router/doctors/pages/Doctor';
+
 function App() {
   return (
     <div className='App'>
@@ -30,6 +32,10 @@ function App() {
 
             <Route path='/sigup/data/:uid' exact > 
               <DataUser/>
+            </Route>
+
+            <Route path='/doctor' exact > 
+              <Doctor/>
             </Route>
 
 

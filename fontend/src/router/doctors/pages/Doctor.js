@@ -1,8 +1,9 @@
 import React from "react";
 import "./doctor.css";
+import DoctorList from "../components/Doctor-llist";
 const Doctor = () => {
   return <div>
-    <h3>Doctor Page </h3>
+    <DoctorList/>
   </div>;
 };
 

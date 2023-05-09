@@ -16,7 +16,32 @@
     }
 
 }
-
+.option{
+    width: 96%;
+    
+    text-align: left;
+    border: 1px solid #ADADAD;
+    background: #fff;
+    border-radius: 7px;
+    padding: 10px 10px;
+    font-size: 18px;
+    resize: none;
+    text-align: left;
+    margin-top: 5px;
+}
+.label{
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    text-align: left;
+    color: #2D3081;
+}
+.expertise{
+    margin: 1rem 0rem;
+}
+.buttoncenter{
+    text-align: center;
+    align-items: center;
+}
 @media (max-width: 768px){
     .row{
         background: #fff;

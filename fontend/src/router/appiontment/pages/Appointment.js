@@ -11,7 +11,6 @@ const Appointment = () => {
           
                 <FormAppointment/>
 
-         
       </div>
   
   );
