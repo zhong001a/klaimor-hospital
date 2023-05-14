@@ -1,0 +1,18 @@
+.doctor-card-container{
+    width: 100%;
+    .doctor-card-image{
+        width: 100%;
+        img{
+            width: 50%;
+        }
+    }
+    .doctor-card-name{
+        color: #2D3081;
+    }
+    .doctor-card-expertise{
+        h3{
+            margin-top: 0px;
+        }
+    }
+
+}

@@ -1,0 +1,36 @@
+.da-container{
+    display: flex;
+
+    .doctor-detail{
+        width: 50%;
+       
+        margin:  10px;
+    }
+    
+    .user-detail{
+        width: 50%;
+
+        .option{
+            width: 98%;
+            text-align: left;
+            border: 1px solid #ADADAD;
+            background: #fff;
+            border-radius: 7px;
+            padding: 10px 10px;
+            font-size: 18px;
+            resize: none;
+            text-align: left;
+            margin-top: 5px;
+        }
+        .label{
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            text-align: left;
+            color: #2D3081;
+        }
+        
+        .button-container{
+            padding-top: 20px;
+        }
+    }
+}

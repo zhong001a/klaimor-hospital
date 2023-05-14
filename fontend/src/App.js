@@ -9,6 +9,7 @@ import Sigup from './router/users/pages/Sigup';
 import DataUser from './router/users/pages/user-data';
 import Doctor from './router/doctors/pages/Doctor';
 import UserProfile from './router/users/pages/user-profile';
+import AppoitmentDoctor from './router/appiontment/pages/appointment-doctor';
 
 function App() {
   return (
@@ -41,6 +42,10 @@ function App() {
 
             <Route path='/Profile' exact > 
               <UserProfile/>
+            </Route>
+
+            <Route path='/doctor/appointment/:did' exact > 
+              <AppoitmentDoctor/>
             </Route>
 
 

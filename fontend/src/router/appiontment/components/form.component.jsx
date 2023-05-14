@@ -2,11 +2,12 @@ import React,{useEffect, useState} from 'react'
 
 import Input from '../../../shared/components/Formcomponent/Input';
 import Button from '../../../shared/components/UIElement/Button/Button';
-import { VALIDATOR_REQUIRE, VALIDATOR_MAXLENGTH, VALIDATOR_MINLENGTH } from '../../../shared/util/validators';
+import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH } from '../../../shared/util/validators';
 import { useForm } from '../../../shared/hook/form-hook';
 import  './form.style.scss'
 import Modal from '../../../shared/components/UIElement/Modal/Modal';
 import axios from 'axios';
+// import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 const FormAppointment = () => {
 
     const [doctors, setDoctor ] = useState([]);
@@ -24,7 +25,6 @@ const FormAppointment = () => {
     const fectDoctor = () =>{
       axios.get(`http://localhost:4040/api/doctor/expertise`)
       .then(response => {
-          // console.log(response.data)
           setDoctor(response.data.doctors)
 
           
@@ -70,30 +70,30 @@ const FormAppointment = () => {
         setExpertise("ความเชี่ยวชาญเวชปฏิบัติทั่วไป")
       }
 
-
+      // const userId = useParams().uid;
+      const userId = "645b71bd7b23191c26d0e087"
       const onSubmitHandler = async event =>{
         const name = formState.inputs.name.value;
         const email = formState.inputs.email.value;
         const phone = formState.inputs.phone.value;
         const symptom = formState.inputs.symptom.value;
         event.preventDefault();
-
-        axios.post(`http://localhost:4040/api/doctor/create/appoint`,{name, phone, email, symptom, expertise})
+        console.log(userId)
+        axios.post(`http://localhost:4040/api/doctor/create/appoint`,{name, phone, email, symptom, expertise, userId})
         .then(response => {
-            console.log(response)
+            
             if(response.status === 201){
+              console.log(response.data)
               openModalHandler()
 
             }
-
-              
           }
         )
         .catch(err =>{
           console.log(err)
      
         })
-        // console.log(name,email,phone,expertise,symptom)
+        // console.log(name,email,phone,expertise,symptom,userId)
       }
 
 
@@ -192,9 +192,6 @@ const FormAppointment = () => {
             </Modal>
 
             </form>
-            
-
-  
   );
 
 };

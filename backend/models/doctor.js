@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
-const mongooseUniqueValidator = require('mongoose-unique-validator')
+
 const Schema = mongoose.Schema;
 
 const doctorSchema = new Schema({
   imageUrl: { type: String, require: true },
-  name: { type: String, require: true, unique: true },
+  name: { type: String, require: true },
   expertise: { type: String, require: true, minlength: 6 },
- 
+  appoint: [{ type: mongoose.Types.ObjectId, require: true, ref: 'Appointment'}]
 });
 
-doctorSchema.plugin(mongooseUniqueValidator);
+
 
 module.exports = mongoose.model('Doctor',doctorSchema);

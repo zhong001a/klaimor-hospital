@@ -18,7 +18,7 @@ const NavLinks = () => {
         <NavLink to='/auth'>Treatment</NavLink>
       </li>
       <li>
-        <NavLink to='/profile'><BsFillPersonFill/></NavLink>
+        <NavLink to='/sigup'><BsFillPersonFill/></NavLink>
       </li>
       
     </ul>

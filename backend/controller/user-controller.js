@@ -19,7 +19,7 @@ const getUser = async (req, res, next) => {
 
 
 const createUser = async (req, res, next) =>{
-    const { username, email, password } = req.body;
+    const { username, email, phone, password } = req.body;
 
     let isExitUser;
 
@@ -41,6 +41,7 @@ const createUser = async (req, res, next) =>{
     const createUser = new User({
         username,
         email,
+        phone,
         password,
         userdata:[],
     
@@ -126,7 +127,24 @@ const getUserData = async (req, res, next) =>{
   res.json({ data : userData.userdata })
 }
 
+const getAppointment = async (req, res, next) =>{
+  const userId = req.params.uid
+  let appointment;
+
+  try {
+    appointment =  await User.findById(userId).populate('userappoint')
+  } catch (error) {
+    const err = new HttpError("Could not find appointment user . ");
+    return  next(err)
+  }
+  
+  res.json({ data : appointment })
+
+
+}
+
 exports.getUser = getUser;
 exports.createUser = createUser;
 exports.createDataUser = createDataUser;
-exports.getUserData = getUserData
+exports.getUserData = getUserData;
+exports.getAppointment = getAppointment;

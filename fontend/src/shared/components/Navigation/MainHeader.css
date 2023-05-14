@@ -7,13 +7,14 @@
     top: 0;
     left: 0;
     background: #ffffff;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.26);
+    /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.26); */
+    border-bottom: 2px solid #2D3081;
     padding: 0 1rem;
     z-index: 5;
   }
   
   main {
-    margin-top: 5rem;
+    margin-top: 7rem;
   }
   
   @media (min-width: 768px) {

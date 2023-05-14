@@ -1,25 +1,10 @@
-.option{
-    width: 96%;
-    font: inherit;
-    text-align: left;
-    border: 1px solid #ADADAD;
-    background: #fff;
-    border-radius: 7px;
-    padding: 10px 10px;
-    font-size: 18px;
-    resize: none;
-}
-.label{
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-    text-align: left;
-    color: #2D3081;
-}
 .doctor-container{
-    list-style-type: none;
-
-    .doctor-list{
-        list-style: none;
-    }
-
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 50px;
+    row-gap: 50px;
+    text-align: center;
+    align-items: center;
+    margin-top: 10px;
 }

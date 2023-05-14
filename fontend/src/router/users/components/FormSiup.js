@@ -18,6 +18,10 @@ const FormSigup = () => {
         value: "",
         isValid: false,
       },
+      phone: {
+        value: "",
+        isValid: false,
+      },
       password: {
         value: "",
         isValid: false,
@@ -32,9 +36,10 @@ const FormSigup = () => {
     event.preventDefault();
     const username = formState.inputs.username.value;
     const email = formState.inputs.email.value;
+    const phone = formState.inputs.phone.value;
     const password = formState.inputs.password.value;
 
-    await axios.post(`http://localhost:4040/api/users/create`,{username,email,password})
+    await axios.post(`http://localhost:4040/api/users/create`,{username,email,phone,password})
     .then(response => {
       const createId = response.data.createUser._id
       history.push(`/sigup/data/${createId}`);
@@ -68,6 +73,16 @@ const FormSigup = () => {
           label="Email"
           validators={[VALIDATOR_EMAIL()]}
           errorText="Please enter a valid Email."
+          onInput={inputHandler}
+        />
+
+        <Input
+          element="input"
+          id="phone"
+          type="text"
+          label="Phone"
+          validators={[VALIDATOR_MINLENGTH(10)]}
+          errorText="Please enter a valid Phone number."
           onInput={inputHandler}
         />
 

@@ -1,16 +1,18 @@
 const mongoose = require("mongoose");
-const mongooseUniqueValidator = require('mongoose-unique-validator')
+
 const Schema = mongoose.Schema;
 
 const appoinSchema = new Schema({
   name: { type: String, require: true },
-  phone: { type: String, require: true, unique: true },
-  email: { type: String, require: true, unique: true },
+  phone: { type: String, require: true  },
+  email: { type: String, require: true },
   expertise: { type: String, require: true  },
-  symptom: { type: String, require: true  }
+  doctorId: [{ type: mongoose.Types.ObjectId, ref: 'Doctor' }],
+  symptom: { type: String, require: true  },
+  userId: [{ type: mongoose.Types.ObjectId, require: true, ref: 'User'}]
  
 });
 
-appoinSchema.plugin(mongooseUniqueValidator);
+
 
 module.exports = mongoose.model('Appointment',appoinSchema);
