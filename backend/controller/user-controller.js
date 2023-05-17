@@ -100,7 +100,7 @@ const createDataUser = async (req, res, next) =>{
           'Creating data user failed can not find user, please try again.',
           500
         );
-        return next(err);
+        return next(error);
     }
 
     res.json({ createDataUser })

@@ -107,19 +107,19 @@ const createAppoin = async (req, res, next) =>{
         userId
     })
 
-    // try {
-    //     await createAppoint.save();
-    // } catch (error) {
-    //     const err = new HttpError("Could not create appoint.", 500);
-    //     return next(err);
-    // }
+    try {
+        await createAppoint.save();
+    } catch (error) {
+        const err = new HttpError("Could not create appoint.", 500);
+        return next(err);
+    }
 
     res.json({  appointment: createAppoint })
    
 }
 
 const createAppointDoctor = async (req, res, next) =>{
-    const { symptom, doctorId, userId } = req.body;
+    const { symptom, doctorId, userId, date, time } = req.body;
 
     let userData ;
     let user;
@@ -173,6 +173,8 @@ const createAppointDoctor = async (req, res, next) =>{
           email:userData.email,
           expertise:doctor.expertise,
           symptom,
+          date,
+          time,
           doctorId,
           userId
       })
@@ -182,7 +184,7 @@ const createAppointDoctor = async (req, res, next) =>{
           sess.startTransaction();
           await createAppoint.save({ session: sess });
           user.userappoint.push( createAppoint );
-          doctor.appoint.push( createAppoin );
+          doctor.appoint.push( createAppoint );
           await doctor.save({ session: sess});
           await user.save({ session: sess});
           await sess.commitTransaction()
@@ -218,6 +220,33 @@ const getAllDoctors = async (req, res, next) =>{
 
 }
 
+const getAppointByUserId = async (req, res, next) =>{
+
+    const userId = req.params.userId;
+    let appoint;
+    let doctor;
+    let dataAppoint;
+    try{
+        appoint = await User.findById(userId).populate('userappoint');
+    }catch(error){
+        const err = new HttpError("Get appointment error.");
+        return next(err);
+    }
+
+    try{
+        doctor = await Appointment.find().populate('doctorId').populate('name');
+    }catch(error){
+        const err = new HttpError("Get appointment error.");
+        return next(err);
+    }
+    dataAppoint = {
+
+    }
+
+
+    res.json({ appointment : doctor });
+}
+
 exports.createDoctor = createDoctor;
 exports.getDoctor = getDoctor;
 exports.getDoctorById =getDoctorById;
@@ -225,3 +254,4 @@ exports.getDoctorByExperties = getDoctorByExperties;
 exports.createAppoin = createAppoin;
 exports.getAllDoctors = getAllDoctors;
 exports.createAppointDoctor = createAppointDoctor;
+exports.getAppointByUserId = getAppointByUserId

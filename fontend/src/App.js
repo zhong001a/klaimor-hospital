@@ -1,4 +1,3 @@
-
 import './App.css';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
 
@@ -10,6 +9,7 @@ import DataUser from './router/users/pages/user-data';
 import Doctor from './router/doctors/pages/Doctor';
 import UserProfile from './router/users/pages/user-profile';
 import AppoitmentDoctor from './router/appiontment/pages/appointment-doctor';
+import UserAppointment from './router/treadment/Appointment';
 
 function App() {
   return (
@@ -46,6 +46,10 @@ function App() {
 
             <Route path='/doctor/appointment/:did' exact > 
               <AppoitmentDoctor/>
+            </Route>
+
+            <Route path='/user/appointment' exact > 
+              <UserAppointment/>
             </Route>
 
 

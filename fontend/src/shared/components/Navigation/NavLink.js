@@ -6,16 +6,16 @@ const NavLinks = () => {
   return (
     <ul className='nav-links'>
       <li>
-        <NavLink to = '/user' exact >Service</NavLink>
+        <NavLink to = '/user' exact >การบริการ</NavLink>
       </li>
       <li>
-        <NavLink to='/appointment'>Appointment</NavLink>
+        <NavLink to='/appointment'>สร้างนัดหมาย</NavLink>
       </li>
       <li>
-        <NavLink to='/doctor'>Doctor</NavLink>
+        <NavLink to='/doctor'>ทีมแพทย์</NavLink>
       </li>
       <li>
-        <NavLink to='/auth'>Treatment</NavLink>
+        <NavLink to='/user/appointment'>การรักษา</NavLink>
       </li>
       <li>
         <NavLink to='/sigup'><BsFillPersonFill/></NavLink>

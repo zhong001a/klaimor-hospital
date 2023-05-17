@@ -4,11 +4,11 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   username: { type: String, require: true },
-  email: { type: String, require: true},
-  phone: { type: String, require: true},
-  password: { type: String, require: true, minlength: 6 },
-  userdata: [{ type: mongoose.Types.ObjectId, require: true, ref: 'UserData'}],
-  userappoint: [{ type: mongoose.Types.ObjectId, require: true, ref: 'Appointment'}]
+  email: { type: String, required: true},
+  phone: { type: String, required: true},
+  password: { type: String, required: true, minlength: 6 },
+  userdata: [{ type: mongoose.Types.ObjectId, required: true, ref: 'UserData'}],
+  userappoint: [{ type: mongoose.Types.ObjectId, required: true, ref: 'Appointment'}]
 });
 
 

@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400&family=Roboto:wght@300;400;500&display=swap');
+.card-appoint{
+    border-bottom: 1px solid #000;
+    width: 100%;
+    table{
+        border-spacing: 0;
+        width: 100%;
+        text-align: left;
+        background: #fff;
+        tr{
+            td{
+               border-bottom: 5px solid #fff;
+               font-family: 'Noto Sans Thai', sans-serif;
+               font-weight: 400;
+               padding: 10px 5px;
+               
+            }
+            .name{
+                width: 9%;
+            }
+            .doctor{
+                width: 10%;
+            }
+            .expertise{
+                width: 11%;
+            }
+            .symptom{
+                width: 10%;
+            }
+            .date{
+                text-align: center;
+                width: 5%;
+            }
+            .time{
+                text-align: center;
+                width: 5%;
+            }
+           
+        }
+    }
+        
+
+}
